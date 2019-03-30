@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
         double counter = 0;
-        int V= 20;
-        double numberOfAttempts = 1000;
+        int V= 21;
+        double numberOfAttempts = 10000;
 
         for (int j = 0; j < numberOfAttempts; j++) {
             Graph g = new Graph(V);
@@ -21,7 +21,7 @@ public class Main {
 
         }
 
-        double probability =  counter2 / numberOfAttempts;
+        double probability =   counter2 / numberOfAttempts;
         System.out.println(probability);
     }
 }
