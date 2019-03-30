@@ -1,27 +1,9 @@
-import networktechnology.L2.Net.Graph.Graph;
-
-import static networktechnology.L2.Net.Graph.Graph.counter2;
+import static networktechnology.L2.Net.Graph.networktechnology.L2.simulations.Simulations.S1;
 
 public class Main {
 
 
     public static void main(String[] args) {
-        double counter = 0;
-        int V= 20;
-        double numberOfAttempts = 10000;
-
-        for (int j = 0; j < numberOfAttempts; j++) {
-            Graph g = new Graph(V);
-            for (int i = 0;i<V-1; i++) {
-                g.addEdge(i, i + 1, 0.95);
-            }
-            g.IntervalTest();
-            System.out.println("**");
-            if (g.isConnected()) counter++;
-
-        }
-
-        double probability =   counter / numberOfAttempts;
-        System.out.println(probability);
+        System.out.println("Network Reliability: "+S1());
     }
 }

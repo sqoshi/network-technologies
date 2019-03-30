@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Graph {
-    public static int counter2;
     static int V;
     static double[][] H;
     static LinkedList<Integer>[] adjListArray;
@@ -44,7 +43,6 @@ public class Graph {
                     r = Math.random();
                     if (r > H[i][adjListArray[i].get(j)]) {
                         removeEdge(i, adjListArray[i].get(j));
-                        counter2++;
                     }
                 }
             }
@@ -70,7 +68,7 @@ public class Graph {
 */
     public void DFSUtil(int v, boolean visited[]) {
         visited[v] = true;
-         System.out.print(v + " ");
+      //   System.out.print(v + " ");
 
         Iterator<Integer> i = adjListArray[v].listIterator();
         while (i.hasNext()) {
