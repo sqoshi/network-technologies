@@ -88,10 +88,10 @@ public class Graph {
 
     public boolean isConnected() {
         System.out.println(counter2);
-        boolean[] visited = new boolean[V];// po dodaniu 1 do V znika problem ale wynik jest bledny
-        for (int j=0;j<V-1;j++) DFSUtil(j, visited);
-        for (int i = V; i>=0; i++) { // -"-
-            if (!visited[V]) {
+        boolean[] visited = new boolean[V];
+        DFSUtil(0, visited);
+        for (int i = V-1; i>=0; i--) {
+            if (!visited[i]) {
                 return false;
             }
         }
