@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Graph {
-    public static double destroCounter;
+    public static int counter2;
     static int V;
     static double[][] H;
     static LinkedList<Integer>[] adjListArray;
@@ -14,7 +14,7 @@ public class Graph {
         adjListArray = new LinkedList[V];
 
 
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < v; i++) {
             adjListArray[i] = new LinkedList<>();
         }
 
@@ -42,17 +42,35 @@ public class Graph {
             for (int j = 0; j < adjListArray[i].size(); ++j) {
                 if (adjListArray[i].get(j) > i) {
                     r = Math.random();
-                    if (r <0.95/* H[i][adjListArray[i].get(j)]*/) {
+                    if (r > H[i][adjListArray[i].get(j)]) {
                         removeEdge(i, adjListArray[i].get(j));
+                        counter2++;
                     }
                 }
             }
         }
     }
+/*
+    public void explore(int v, boolean visited[]) {
+        visited[v] = true;
+        for (int i = 0; i < adjListArray[v].size(); i++) {
+            explore(adjListArray[v].get(i), visited);
+        }
+    }
 
+    public boolean connection() {
+        boolean[] visited = new boolean[V];
+        for (int i = 0; i < V; i++) {
+            explore(i,visited);
+            if (!visited[V])
+                return false;
+        }
+        return true;
+    }
+*/
     public void DFSUtil(int v, boolean visited[]) {
         visited[v] = true;
-        //  System.out.print(v + " ");
+         System.out.print(v + " ");
 
         Iterator<Integer> i = adjListArray[v].listIterator();
         while (i.hasNext()) {
@@ -64,12 +82,14 @@ public class Graph {
 
     public void DFS(int v) {
         boolean visited[] = new boolean[V];
+
         DFSUtil(v, visited);
     }
 
     public boolean isConnected() {
-        boolean[] visited = new boolean[V + 1];
-        for (int i = 0; i < V + 1; i++) {
+        System.out.println(counter2);
+        boolean[] visited = new boolean[V];
+        for (int i = V; i>=0; i++) {
             DFSUtil(i, visited);
             if (!visited[V]) {
                 return false;

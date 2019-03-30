@@ -1,23 +1,27 @@
 import networktechnology.L2.Net.Graph.Graph;
 
+import static networktechnology.L2.Net.Graph.Graph.counter2;
+
 public class Main {
 
 
     public static void main(String[] args) {
-        double counter = 1;
-        double numberOfAttempts = 100000;
+        double counter = 0;
+        int V= 20;
+        double numberOfAttempts = 1000;
 
         for (int j = 0; j < numberOfAttempts; j++) {
-            Graph g = new Graph(21);
-            for (int i = 0; i < 20; i++) {
+            Graph g = new Graph(V);
+            for (int i = 0;i<V-1; i++) {
                 g.addEdge(i, i + 1, 0.95);
             }
             g.IntervalTest();
+            System.out.println("**");
             if (g.isConnected()) counter++;
 
         }
 
-        double probability =  counter / numberOfAttempts;
+        double probability =  counter2 / numberOfAttempts;
         System.out.println(probability);
     }
 }
