@@ -87,7 +87,6 @@ public class Graph {
     }
 
     public boolean isConnected() {
-        System.out.println(counter2);
         boolean[] visited = new boolean[V];
         DFSUtil(0, visited);
         for (int i = V-1; i>=0; i--) {
