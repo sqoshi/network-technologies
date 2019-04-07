@@ -48,27 +48,9 @@ public class Graph {
             }
         }
     }
-/*
-    public void explore(int v, boolean visited[]) {
-        visited[v] = true;
-        for (int i = 0; i < adjListArray[v].size(); i++) {
-            explore(adjListArray[v].get(i), visited);
-        }
-    }
 
-    public boolean connection() {
-        boolean[] visited = new boolean[V];
-        for (int i = 0; i < V; i++) {
-            explore(i,visited);
-            if (!visited[V])
-                return false;
-        }
-        return true;
-    }
-*/
     public void DFSUtil(int v, boolean visited[]) {
         visited[v] = true;
-      //   System.out.print(v + " ");
 
         Iterator<Integer> i = adjListArray[v].listIterator();
         while (i.hasNext()) {
@@ -78,16 +60,61 @@ public class Graph {
         }
     }
 
-    public void DFS(int v) {
+    public static void BFS(int s) {
+        boolean visited[] = new boolean[V];
+        int[] truepath = new int[V];
+
+
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+
+        visited[s] = true;
+        queue.add(s);
+
+        while (queue.size() != 0) {
+            s = queue.poll();
+            LinkedList<Integer> neighbours = adjListArray[s];
+            int[] path = new int[neighbours.size()];
+            for (int i = 0; i < neighbours.size(); i++) {
+                int n = neighbours.get(i);
+                if (!visited[n]) {
+                    visited[n] = true;
+                    path[i] = n;
+                    queue.add(n);
+                }
+            }
+
+        }
+
+    }
+
+    public static void BFS2(int s) {
         boolean visited[] = new boolean[V];
 
-        DFSUtil(v, visited);
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+
+        visited[s] = true;
+        queue.add(s);
+
+        while (queue.size() != 0) {
+            s = queue.poll();
+            System.out.print(s + " ");
+
+            Iterator<Integer> i = adjListArray[s].listIterator();
+            while (i.hasNext()) {
+                int n = i.next();
+                if (!visited[n]) {
+                    visited[n] = true;
+                    queue.add(n);
+                }
+            }
+        }
     }
+
 
     public boolean isConnected() {
         boolean[] visited = new boolean[V];
         DFSUtil(0, visited);
-        for (int i = V-1; i>=0; i--) {
+        for (int i = V - 1; i >= 0; i--) {
             if (!visited[i]) {
                 return false;
             }
@@ -95,11 +122,33 @@ public class Graph {
         return true;
     }
 
-    public static void printM(double mat[][]) {
-        for (int i = 0; i < mat.length; i++)
+   /* static double averageDelay(int[][] matrixInt, Graph grah){
+        double Sum=0;
 
-            for (int j = 0; j < mat[i].length; j++)
-                System.out.print(mat[i][j] + " ");
+        for (int i =0;i<V;++i){
+            for (int j=0;j<V;j++){
+                Sum+=matrixInt[i][j];
+            }
+        }
+        double SumEdges=0;
+        for(int i=0;i<V;i++){
+            for(int j=0;j< adjListArray[V].size();j++){
+                H[i][j]
+            }
+        }
+
+    }*/
+
+    private void printMatrix(int[][] matrix) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (matrix[i][j] / 100 > 0) System.out.print(matrix[i][j] + " ");
+                else if (matrix[i][j] / 10 > 0) System.out.print("0" + matrix[i][j] + " ");
+                else System.out.print("00" + matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
     public static void printGraph() {
