@@ -27,16 +27,27 @@ class Simulation2 {
     };
     private static int[][] A = new int[10][10];
     private static int[][] C = new int[10][10];
+    private static int[][] M = new int[10][10];
 
     public void perform() {
         SimpleWeightedGraph<Integer, DefaultWeightedEdge> graph = MyGraph();
         generateA(graph);
         generateC();
-        // Graph.printMatrix(A);
-        // Graph.printMatrix(C);
+        generateM();
+       // Graph.printMatrix(A);
+       // Graph.printMatrix(C);
         // Graph.printMatrix(N);
-       // System.out.println(calculateAverageDelay(graph));
+        // System.out.println(calculateAverageDelay(graph));
         System.out.print(networkCheck(graph));
+    }
+    private void generateM() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (i != j) {
+                    M[i][j] =  A[i][j] +5;
+                }
+            }
+        }
     }
 
     /*
@@ -46,7 +57,7 @@ class Simulation2 {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (i != j) {
-                    C[i][j] = 2 * A[i][j] * 1500;
+                    C[i][j] =  2*A[i][j] *1500;
                 }
             }
         }
@@ -111,14 +122,14 @@ class Simulation2 {
         for (int i = 0; i < 10; i++) {
             graph.addVertex(i);
             if (i > 0)
-                graph.setEdgeWeight(graph.addEdge(i - 1, i), 0.6);
+                graph.setEdgeWeight(graph.addEdge(i - 1, i), 0.95);
         }
-        graph.setEdgeWeight(graph.addEdge(0, 6), 0.2);
-        graph.setEdgeWeight(graph.addEdge(1, 7), 0.2);
-        graph.setEdgeWeight(graph.addEdge(2, 8), 0.2);
-        graph.setEdgeWeight(graph.addEdge(3, 9), 0.2);
-        graph.setEdgeWeight(graph.addEdge(5, 9), 0.2);
-        graph.setEdgeWeight(graph.addEdge(0, 9), 0.2);
+        graph.setEdgeWeight(graph.addEdge(0, 6), 0.95);
+        graph.setEdgeWeight(graph.addEdge(1, 7), 0.95);
+        graph.setEdgeWeight(graph.addEdge(2, 8), 0.95);
+        graph.setEdgeWeight(graph.addEdge(3, 9), 0.95);
+        graph.setEdgeWeight(graph.addEdge(5, 9), 0.95);
+        graph.setEdgeWeight(graph.addEdge(0, 9), 0.95);
 
         return graph;
     }
@@ -127,7 +138,7 @@ class Simulation2 {
     private double networkCheck(SimpleWeightedGraph<Integer, DefaultWeightedEdge> graph) {
         int counter = 0;
         final int numberOfAttempts = 10000;
-        double T_max = 1.2 *calculateAverageDelay(graph);
+        double T_max = 2.6 * calculateAverageDelay(graph);
 
         for (int i = 0; i < numberOfAttempts; i++) {
             SimpleWeightedGraph<Integer, DefaultWeightedEdge> graphToCheck = GraphCloner.deepCloneGraph(graph);
