@@ -11,7 +11,7 @@ public class Graph {
     static LinkedList<Integer>[] adjListArray;
 
     /*
-    making the graf exactly in constructor
+    building graph and adjlsits
      */
     public Graph(int v) {
         this.V = v;
@@ -71,9 +71,7 @@ public class Graph {
     public void DFS(int v, boolean visited[]) {
         visited[v] = true;
 
-        Iterator<Integer> i = adjListArray[v].listIterator();
-        while (i.hasNext()) {
-            int n = i.next();
+        for (int n : adjListArray[v]) {
             if (!visited[n])
                 DFS(n, visited);
         }
@@ -104,29 +102,6 @@ public class Graph {
 
         }
 
-    }
-
-    public static void BFS2(int s) {
-        boolean visited[] = new boolean[V];
-
-        LinkedList<Integer> queue = new LinkedList<Integer>();
-
-        visited[s] = true;
-        queue.add(s);
-
-        while (queue.size() != 0) {
-            s = queue.poll();
-            System.out.print(s + " ");
-
-            Iterator<Integer> i = adjListArray[s].listIterator();
-            while (i.hasNext()) {
-                int n = i.next();
-                if (!visited[n]) {
-                    visited[n] = true;
-                    queue.add(n);
-                }
-            }
-        }
     }
 
     /*
