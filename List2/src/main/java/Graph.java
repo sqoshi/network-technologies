@@ -19,7 +19,7 @@ public class Graph {
 
 
         for (int i = 0; i < v; i++) {
-            adjListArray[i] = new LinkedList<>();
+            adjListArray[i] = new LinkedList<Integer>();
         }
 
         H = new double[V][V];
