@@ -8,25 +8,23 @@ public class Decoding {
     public static void main(String[] args) throws IOException {
 
         String data = "";
-        String piece;
+        String line;
 
         File inputFile = new File("/home/piotr/IdeaProjects/TS/List3/Exercise1/src/W.txt");
         File outputFile = new File("/home/piotr/IdeaProjects/TS/List3/Exercise1/src/Z1.txt");
 
         try {
-            // Wczytuję dane wejściowe
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 
-            //wczytaj całą zawartość inputFile do zmiennej data
-            while ((piece = reader.readLine()) != null) {
-                data += piece;
+            while ((line = reader.readLine()) != null) {
+                data += line;
 
             }
 
             reader.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to read from input file. No file or no read permission!");
+            System.out.println("W.txt foes not exist");
             System.exit(0);
         }
 
@@ -34,7 +32,7 @@ public class Decoding {
         //sprawdzaj czy wczytano dane
 
         if (data.isEmpty()) {
-            System.out.println("No data in input file! Application will be terminated!");
+            System.out.println("There isn't any data in W.txt");
             System.exit(0);
         }
 
@@ -50,7 +48,7 @@ public class Decoding {
             writer.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to find the output file. No file or no write permission!");
+            System.out.println("Can't find Z1.txt file");
             System.exit(0);
         }
 

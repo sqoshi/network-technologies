@@ -9,56 +9,52 @@ public class Framing {
      */
     public static String code(String input, int frameSize) {
 
-        String data = "";
-        String piece;
+        StringBuilder data = new StringBuilder();
+        String line;
         String crc;
         String flag = "01111110";
 
         // a loop - dividing the input into frameSize pieces
         int i = 0;
 
-        System.out.println("Pobrano " + input.length() + " bitów danych.");
+        System.out.println("Downloaded " + input.length() + " bits of data.");
 
         while (i < input.length()) {
-            // the last piece doesn't have to have frameSize length
+            // the last line doesn't have to have frameSize length
             if (input.length() - i > frameSize)
-                piece = input.substring(i, i + frameSize);
+                line = input.substring(i, i + frameSize);
             else
-                piece = input.substring(i);
+                line = input.substring(i);
 
-            System.out.print("Data: " + piece + " ");
+            System.out.print("Data: " + line + " ");
 
             // create CRC code
-            crc = checkSum_CRC8(piece);
+            crc = checkSum_CRC8(line);
 
             System.out.print("CRC8: " + crc + " ");
 
-            // append crc to piece's end
-            piece += crc;
+            // append crc to line's end
+            line += crc;
 
             // make bit stuffing
-            piece = piece.replace("11111", "111110");
+            line = line.replace("11111", "111110");
 
             // add flags
-            piece = flag + piece + flag;
+            line = flag + line + flag;
 
             i += frameSize;
-            data += piece;
-            System.out.println("Stuffed frame: " + piece + " ");
+            data.append(line);
+            data.append("\n");
+            System.out.println("Stuffed frame: " + line + " ");
         }
-        return data;
+        return data.toString();
     }
 
-    /**
-     * Decodes the input data and returns it in a string
-     *
-     * @param input: String
-     * @return decoded data: String
-     */
+
     static String decode(String input) {
 
         String flag = "01111110";
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         //remove all flags with space character
         input = input.replace(flag + flag, " ");
@@ -77,20 +73,15 @@ public class Framing {
             System.out.println("#: " + crc + " " + checkSum_CRC8(frame));
             if (crc.equals(checkSum_CRC8(frame))) {
                 System.out.println("Successfully decoded frame " + frame + " size: " + frame.length());
-                output += frame;
+                output.append(frame);
+                output.append("\n");
             } else {
                 System.out.println("Error while decoding frame " + frame + " size: " + frame.length());
             }
         }
-        return output;
+        return output.toString();
     }
 
-    /**
-     * Cyclic Redundancy Check
-     *
-     * @param input: string - Binary input data
-     * @return: string - binary CRC
-     */
     private static String checkSum_CRC8(String input) {
         StringBuilder frame = new StringBuilder();
         frame.append(input);
