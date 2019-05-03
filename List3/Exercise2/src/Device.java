@@ -9,15 +9,10 @@ public class Device extends Thread {
 
     private Cable cab;
 
-    public Device(Cable c) {
+    Device(Cable c) {
         this.cab = c;
     }
 
-    /**
-     * Wysyła wiadomość do hosta o numerze h
-     *
-     * @
-     */
     @Override
     public void run() {
         try {
@@ -26,43 +21,30 @@ public class Device extends Thread {
                 Thread.sleep(r.nextInt(5) * 1000);
             }
 
-            cab.add("[BEGIN " + this.getId() + "]");
-            Random r = new Random();
+            cab.add("Device: " + this.getId() + " START");
             Thread.sleep(500);
-
-        // int leftLimit = 97; // letter 'a'
-        // int rightLimit = 122; // letter 'z'
-        // int targetStringLength = 10;
-        // Random random = new Random();
-        // StringBuilder buffer = new StringBuilder(targetStringLength);
-        // for (int i = 0; i < targetStringLength; i++) {
-        //     int randomLimitedInt = leftLimit + (int)
-        //             (random.nextFloat() * (rightLimit - leftLimit + 1));
-        //     buffer.append((char) randomLimitedInt);
-        // }
-        // String message = buffer.toString();
-
-            String message = Integer.toString(r.nextInt(100000));
+            String message = "Data From: " + this.getId() +" Device";
             cab.add(message);
             Thread.sleep(500);
-            cab.add("[END " + this.getId() + "]");
+            cab.add("Device: " + this.getId() + " END");
 
             String l1, l3;
             l3 = cab.data.get(cab.data.size() - 1);
             l1 = cab.data.get(cab.data.size() - 3);
 
-            if (l1.equals("[BEGIN " + this.getId() + "]")
+            if (l1.equals("Device: " + this.getId() + " START")
                     &&
-                    l3.equals("[END " + this.getId() + "]")) {
-                System.out.println("Thread " + this.getId() + " has successfully transmitted data.");
+                    l3.equals("Device: " + this.getId() + " END")) {
+                System.out.println("Device " + this.getId() + " has successfully transmitted data.");
                 cab.succ++;
             } else {
-                cab.add("[JAM " + this.getId() + "] //collision detected");
+                cab.add("JAM\t " + this.getId() + "  Collision!");
             }
-        } catch (IOException | InterruptedException ex) {
+        } catch (IOException | InterruptedException | NullPointerException ex) {
             Logger.getLogger(Device.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+
 
 
         // jeśli się zmienia, to czekam od 1 do 5 sekund
