@@ -12,14 +12,14 @@ class Cable {
      */
     boolean canTransmit() throws InterruptedException, IOException{
 
-        int size = this.data.size();
+        int size = data.size();
         Thread.sleep(1000);
-        return size == this.data.size();
+        return size == data.size();
 
     }
 
     void add(String s) {
-        this.data.add(s);
+        data.add(s);
         System.out.println(s);
     }
 }

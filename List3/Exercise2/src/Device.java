@@ -18,7 +18,9 @@ public class Device extends Thread {
         try {
             while (!cab.canTransmit()) {
                 Random r = new Random();
-                Thread.sleep(r.nextInt(5) * 1000);
+                long x =r.nextInt(5) * 1000;
+                Thread.sleep(x);
+                System.out.println("Device: "+ this.getId()+" cant transmit now, need to wait: "+x/1000+" s");
             }
 
             cab.add("Device: " + this.getId() + " START");
@@ -38,7 +40,7 @@ public class Device extends Thread {
                 System.out.println("Device " + this.getId() + " has successfully transmitted data.");
                 cab.succ++;
             } else {
-                cab.add("JAM\t " + this.getId() + "  Collision!");
+                cab.add("\t JAM " + this.getId() + "  Collision!");
             }
         } catch (IOException | InterruptedException | NullPointerException ex) {
 //            Logger.getLogger(Device.class.getName()).log(Level.SEVERE, null, ex);
