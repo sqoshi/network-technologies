@@ -41,23 +41,10 @@ public class Device extends Thread {
                 cab.add("JAM\t " + this.getId() + "  Collision!");
             }
         } catch (IOException | InterruptedException | NullPointerException ex) {
-            Logger.getLogger(Device.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(Device.class.getName()).log(Level.SEVERE, null, ex);
 
         }
 
-
-
-        // jeśli się zmienia, to czekam od 1 do 5 sekund
-
-        // jeśli mogę zapisywać, to piszę:
-        // [BEGIN nr. wątku]
-        // czekam 0,5 s
-        // wpisuje losową liczbę (0 - 100000) znak po znaku w taki sposób, aby kolejne litery pojawiały się co 0.5 s
-        // wpisuję [END nr. wątku]
-
-        // wczytuję 3 ostatnie linijki pliku
-        // jeśli pierwsza i ostatnia są równe moim nagłówkom [BEGIN] i [END] to zatwierdzam transmisję jako udaną
-        // jeśli nie, to dopisuję do pliku [JAM nr. wątku]
     }
 
 
