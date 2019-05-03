@@ -4,16 +4,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Host extends Thread {
+public class Device extends Thread {
+
 
     private Cable cab;
 
-    public Host(Cable c) {
+    public Device(Cable c) {
         this.cab = c;
     }
 
     /**
      * Wysyła wiadomość do hosta o numerze h
+     *
+     * @
      */
     @Override
     public void run() {
@@ -26,6 +29,19 @@ public class Host extends Thread {
             cab.add("[BEGIN " + this.getId() + "]");
             Random r = new Random();
             Thread.sleep(500);
+
+        // int leftLimit = 97; // letter 'a'
+        // int rightLimit = 122; // letter 'z'
+        // int targetStringLength = 10;
+        // Random random = new Random();
+        // StringBuilder buffer = new StringBuilder(targetStringLength);
+        // for (int i = 0; i < targetStringLength; i++) {
+        //     int randomLimitedInt = leftLimit + (int)
+        //             (random.nextFloat() * (rightLimit - leftLimit + 1));
+        //     buffer.append((char) randomLimitedInt);
+        // }
+        // String message = buffer.toString();
+
             String message = Integer.toString(r.nextInt(100000));
             cab.add(message);
             Thread.sleep(500);
@@ -43,12 +59,11 @@ public class Host extends Thread {
             } else {
                 cab.add("[JAM " + this.getId() + "] //collision detected");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Host.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | InterruptedException ex) {
+            Logger.getLogger(Device.class.getName()).log(Level.SEVERE, null, ex);
 
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Host.class.getName()).log(Level.SEVERE, null, ex);
         }
+
 
         // jeśli się zmienia, to czekam od 1 do 5 sekund
 
@@ -62,5 +77,6 @@ public class Host extends Thread {
         // jeśli pierwsza i ostatnia są równe moim nagłówkom [BEGIN] i [END] to zatwierdzam transmisję jako udaną
         // jeśli nie, to dopisuję do pliku [JAM nr. wątku]
     }
-}
 
+
+}

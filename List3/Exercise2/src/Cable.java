@@ -2,17 +2,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cable {
+class Cable {
 
     List<String> data = new ArrayList();
     int succ = 0;
 
     /**
      * Returns wether data can be transmitted through the cable or not
-     *
      * @return can transmit boolean
      */
-    public boolean canTransmit() throws InterruptedException, IOException {
+    boolean canTransmit() throws InterruptedException, IOException{
 
         int size = this.data.size();
         Thread.sleep(1000);
@@ -22,10 +21,9 @@ public class Cable {
 
     /**
      * Adds new line to the data list
-     *
      * @param s
      */
-    public void add(String s) {
+    void add(String s) {
         this.data.add(s);
         System.out.println(s);
     }

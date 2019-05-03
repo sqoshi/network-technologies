@@ -28,7 +28,6 @@ public class Framing {
 
             System.out.print("Data: " + line + " ");
 
-            // create CRC code
             crc = checkSum_CRC8(line);
 
             System.out.print("CRC8: " + crc + " ");
@@ -56,28 +55,27 @@ public class Framing {
         String flag = "01111110";
         StringBuilder output = new StringBuilder();
 
-        //remove all flags with space character
         input = input.replace(flag + flag, " ");
         input = input.replace(flag, "");
 
         String[] data = input.split(" ");
 
-        // strip from stuffend zeros
         for (int i = 0; i < data.length; i++) {
             data[i] = data[i].replace("111110", "11111");
         }
-
+        int i=0;
         for (String s : data) {
             String crc = s.substring(s.length() - 8);
             String frame = s.substring(0, s.length() - 8);
             System.out.println("#: " + crc + " " + checkSum_CRC8(frame));
             if (crc.equals(checkSum_CRC8(frame))) {
-                System.out.println("Successfully decoded frame " + frame + " size: " + frame.length());
+                System.out.println(i+" Successfully decoded frame " + frame + " size: " + frame.length());
                 output.append(frame);
                 output.append("\n");
             } else {
-                System.out.println("Error while decoding frame " + frame + " size: " + frame.length());
+                System.out.println(i+"Error while decoding frame " + frame + " size: " + frame.length());
             }
+            i++;
         }
         return output.toString();
     }

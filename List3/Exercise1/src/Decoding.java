@@ -29,18 +29,14 @@ public class Decoding {
         }
 
 
-        //sprawdzaj czy wczytano dane
 
         if (data.isEmpty()) {
-            System.out.println("There isn't any data in W.txt");
+            System.out.println("W.txt is empty");
             System.exit(0);
         }
 
-        // dekoduj dane
-        System.out.print(data);
         String output = Framing.decode(data);
 
-        // zapisz do pliku
         try {
             outputFile.delete();
             BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
