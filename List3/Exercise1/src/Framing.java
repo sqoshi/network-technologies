@@ -14,13 +14,11 @@ public class Framing {
         String crc;
         String flag = "01111110";
 
-        // a loop - dividing the input into frameSize pieces
         int i = 0;
 
         System.out.println("Downloaded " + input.length() + " bits of data.");
 
         while (i < input.length()) {
-            // the last line doesn't have to have frameSize length
             if (input.length() - i > frameSize)
                 line = input.substring(i, i + frameSize);
             else
@@ -32,7 +30,6 @@ public class Framing {
 
             System.out.print("CRC8: " + crc + " ");
 
-            // append crc to line's end
             line += crc;
 
             // make bit stuffing
@@ -63,18 +60,18 @@ public class Framing {
         for (int i = 0; i < data.length; i++) {
             data[i] = data[i].replace("111110", "11111");
         }
-        int i=0;
+        int i = 0;
         for (String s : data) {
             String crc = s.substring(s.length() - 8);
             String frame = s.substring(0, s.length() - 8);
-            System.out.println("#: " + crc + " " + checkSum_CRC8(frame));
             if (crc.equals(checkSum_CRC8(frame))) {
-                System.out.println(i+" Successfully decoded frame " + frame + " size: " + frame.length());
+                System.out.println(i + ". [SUCCESS]  Frame:" + frame + " size: " + frame.length());
                 output.append(frame);
                 output.append("\n");
             } else {
-                System.out.println(i+"Error while decoding frame " + frame + " size: " + frame.length());
+                System.out.println(i + ". [ERROR] Frame:" + frame + " size: " + frame.length());
             }
+            System.out.println("[CRC]: Taken from Data: " + crc + " Calculated: " + checkSum_CRC8(frame));
             i++;
         }
         return output.toString();

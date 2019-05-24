@@ -10,7 +10,7 @@ class Cable {
      * Returns wether data can be transmitted through the cable or not
      * @return can transmit boolean
      */
-    boolean canTransmit() throws InterruptedException, IOException{
+    boolean canTransmit() throws InterruptedException{
 
         int size = data.size();
         Thread.sleep(1000);

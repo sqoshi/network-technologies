@@ -42,7 +42,7 @@ public class Device extends Thread {
             } else {
                 cab.add("\t JAM " + this.getId() + "  Collision!");
             }
-        } catch (IOException | InterruptedException | NullPointerException ex) {
+        } catch (InterruptedException | NullPointerException ex) {
 //            Logger.getLogger(Device.class.getName()).log(Level.SEVERE, null, ex);
 
         }
