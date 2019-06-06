@@ -4,7 +4,7 @@
 
   my $d = HTTP::Daemon->new(
            LocalAddr => 'localhost',
-           LocalPort => 4322,
+           LocalPort => 4321,
        )|| die;
   
   print "Please contact me at: <URL:", $d->url, ">\n";
